@@ -1,0 +1,28 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Reds pdf
+reds_trainee_take_home_assessment_2025.pdf
+
+# Remove when read me is written
+README.md
+
+data/raw/data.csv
+
+
+
