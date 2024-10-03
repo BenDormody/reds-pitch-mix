@@ -1,12 +1,13 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-from tensorflow.keras.optimizers import Adam
 import numpy as numpy
 
+# This is due to recent import errors for tensorflow.keras
+Sequential = tf.keras.models.Sequential
+layers = tf.keras.layers
+Adam = tf.keras.optimizers.Adam
+
+
 # This will be our class for the model we use in training and predicting
-
-
 class PitchModel:
     # Initialize with our class_count, this is hard set to 3 (FB, BB, OS) and input dimensions
     def __init__(self, input_dim, class_count=3):
@@ -18,12 +19,12 @@ class PitchModel:
     def build_compile_model(self, input_dim, class_count):
         # Model with using relu activation and softmax for percentage outputs
         model = Sequential([
-            Dense(64, activation='relu', input_shape(input_dim,)),
-            Dropout(0.2),
-            Dense(32, activation='relu'),
-            Dropout(0.2),
-            Dense(16, actiavation='relu'),
-            Dense(class_count, activation='softmax')
+            layers.Dense(64, activation='relu', input_shape=(input_dim,)),
+            layers.Dropout(0.2),
+            layers.Dense(32, activation='relu'),
+            layers.Dropout(0.2),
+            layers.Dense(16, actiavation='relu'),
+            layers.Dense(class_count, activation='softmax')
         ])
         # We compile and return the model, using Adam optimizer which is standard for classification
         model.compile(optimizers=Adam(learning_rate=.001),
@@ -32,6 +33,7 @@ class PitchModel:
         return model
     # Example train call
     # train_history = predictor.train(train_features, train_labels)
+
     def train(self, train_features, train_labels, epochs=100, batch_size=32, validation_split=0.2):
         return self.model.fit(train_features, train_labels, epochs=epochs, batch_size=batch_size, validation_split=validation_split, verbose=1)
 
